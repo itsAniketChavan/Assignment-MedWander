@@ -3,7 +3,6 @@ const app = express();
 require('dotenv').config();
 
 
-// Root route, returns data array as JSON
 app.get('/', (req, res) => {
     return res.status(200).json("welcome")
 });
