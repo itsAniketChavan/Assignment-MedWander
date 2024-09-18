@@ -6,35 +6,66 @@ const connectDB = require('./db');
 // Call the DB connection when starting the server
 const dbConnection = connectDB(); 
 
+// Enable JSON body parsing middleware
+app.use(express.json());
 
-app.post('/addSampleUsers', async (req, res) => {
+app.post('/addSampleUsers', (req, res) => {
     try {
-      // Define the SQL query to insert sample data
+      // Extract name and email from the request body
+      const {form_type, name, country_code, phone_no} = req.body;
+
+      // Check if both name and email are provided
+      if (!form_type || !name || !country_code || !phone_no) {
+        return res.status(400).json({ message: 'form_Type, Name and email are required' });
+      }
+
+      // Define the SQL query to insert dynamic data
       const sqlQuery = `
-        INSERT INTO users (name, email) VALUES 
-        ('Alice Johnson', 'alice@example.com')
+        INSERT INTO users (form_type, name, country_code, phone_no) VALUES 
+        (?, ?, ?, ?)
       `;
-  
-      // Execute the query
-      const result = dbConnection.query(sqlQuery);
-    
+
+      // Execute the query with user-provided data
+      const result = dbConnection.query(sqlQuery, [form_type, name, country_code, phone_no]);
+
       // Send a success response
       res.status(200).json({
-        message: 'Sample users added successfully!',
-        // affectedRows: result.affectedRows // Number of rows affected
+        message: 'Sample user added successfully!',
+         
       });
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Error inserting sample data' });
     }
-  });
-  
-
-
-
-app.get('/', (req, res) => {
-    return res.status(200).json("welcome")
 });
+
+
+
+app.get('/getAllUsers', (req, res) => {
+  try {
+      // Define the SQL query to retrieve all users
+      const sqlQuery = 'SELECT * FROM users';
+
+      // Execute the query
+      dbConnection.query(sqlQuery, (err, results) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).json({ message: 'Error retrieving users data' });
+          }
+
+          // Send the result as a response
+          res.status(200).json({
+              message: 'Users retrieved successfully!',
+              users: results
+          });
+      });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error retrieving users data' });
+  }
+});
+
+
 
 // Start the server
 app.listen(process.env.PORT || 3000, () => {
