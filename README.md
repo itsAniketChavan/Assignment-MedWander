@@ -48,5 +48,6 @@ npm run dev
 - **Database Integration**: Stores form submissions in an SQL database, recording form type, name, country code, and phone number.
 - **Data Synchronization**: Connects to an online Excel sheet with a "Refresh" button to update the sheet with new data from the SQL database.
 
-
+## Additional Information
+For any questions or issues, please open an issue in the GitHub repository or contact me via [your-email@example.com].
  
