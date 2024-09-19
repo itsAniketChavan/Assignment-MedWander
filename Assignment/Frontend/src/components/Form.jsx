@@ -231,7 +231,7 @@ export default function Form({ formType }) {
         }`}
         disabled={syncLoading}
       >
-        {syncLoading ? "Synchronizing..." : "Synchronize"}
+        {syncLoading ? "Refreshing..." : "Refresh"}
       </button>
       <button
     onClick={() => window.open("https://docs.google.com/spreadsheets/d/1lNzfHAJMXRwaJWwqSDwdKZHVTTujpy3z4p7w08eOcp0/edit?gid=0#gid=0", "_blank")}
