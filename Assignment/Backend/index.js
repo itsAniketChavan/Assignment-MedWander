@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const connectDB = require('./db');
+const connection = require('./db');
+// const connectDB = require('./db');
 
 // Call the DB connection when starting the server
-const dbConnection = connectDB(); 
+const dbConnection = connection
 
 // Enable JSON body parsing middleware
 app.use(express.json());
@@ -67,7 +68,28 @@ app.get('/getAllUsers', (req, res) => {
 
 
 
+// Data-synchronizing.....
+const { synchronizing } = require('./spreadsheet'); // Import the Google Sheets service
+// const connection = require('./db');
+// Route to fetch Google Sheets data
+app.post('/data-synchronizing', async (req, res) => {
+    try {
+        const result = await synchronizing(); // Wait for the spreadsheet data
+
+         
+        return res.status(200).json({result });
+         
+         
+    
+    } catch (error) {
+        // Handle error and respond with a 500 status code
+        res.status(500).json({ message: 'Error fetching spreadsheet data', error: error.message });
+    }
+});
+
+ 
 // Start the server
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });
+
