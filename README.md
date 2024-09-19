@@ -19,4 +19,23 @@ For the frontend:
 Copy code
 cd ../frontend
 npm install
+
+## Create a .env file in the backend directory with the following variables:
+
+makefile
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=your_database_name
+GOOGLE_SHEET_ID=your_google_sheet_id
+GOOGLE_API_KEY=your_google_api_key
+
+Start the backend server:
+cd backend
+npm run dev
+
+Start the frontend application:
+cd ../frontend
+npm run dev
+
  
