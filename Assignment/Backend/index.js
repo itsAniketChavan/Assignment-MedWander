@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const connection = require('./db');
-// const connectDB = require('./db');
 
-// Call the DB connection when starting the server
 const dbConnection = connection
+
+var cors = require('cors')
+ 
+
+app.use(cors())
+
 
 // Enable JSON body parsing middleware
 app.use(express.json());
