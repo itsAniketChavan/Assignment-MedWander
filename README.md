@@ -1,5 +1,6 @@
 ﻿# Assignment-MedWander
 
+ ## Deployed Link - https://assignment-med-wander.vercel.app/
  ## Technologies Used
 - **Frontend**: React, Tailwind CSS
 - **Backend**: Node.js, Express
