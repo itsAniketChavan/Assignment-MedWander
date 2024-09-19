@@ -38,4 +38,15 @@ Start the frontend application:
 cd ../frontend
 npm run dev
 
+## Features
+
+- **Dynamic Forms**: Users can choose between "Form A" and "Form B". Each form includes input fields for Name, Country Code, and Phone Number.
+- **Form Validation**:
+  - Name must be non-empty and contain only alphabetic characters.
+  - Country Code must be selected from a predefined list.
+  - Phone Number must be numeric and follow the format specified by the selected Country Code.
+- **Database Integration**: Stores form submissions in an SQL database, recording form type, name, country code, and phone number.
+- **Data Synchronization**: Connects to an online Excel sheet with a "Refresh" button to update the sheet with new data from the SQL database.
+
+
  
